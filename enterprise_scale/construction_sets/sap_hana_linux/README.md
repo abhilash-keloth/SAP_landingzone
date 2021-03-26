@@ -26,8 +26,12 @@ parameter_files=("\
   -var-file=${configuration_folder}/resource_groups.tfvars \
   -var-file=${configuration_folder}/networking.tfvars \
   -var-file=${configuration_folder}/nsg.tfvars \
+  -var-file=${configuration_folder}/public_ip.tfvars \
   -var-file=${configuration_folder}/keyvault.tfvars \
-  -var-file=${configuration_folder}/compute.tfvars 
+  -var-file=${configuration_folder}/compute.tfvars \
+  -var-file=${configuration_folder}/log_analytics.tfvars \
+  -var-file=${configuration_folder}/storage_accounts.tfvars \
+  -var-file=${configuration_folder}/recovery_vaults.tfvars 
 ")
   # -var-file=${configuration_folder}/firewalls.tfvars \
   # -var-file=${configuration_folder}/firewall_application_rule_collection_definition.tfvars \

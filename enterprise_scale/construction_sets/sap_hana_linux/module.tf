@@ -1,7 +1,7 @@
 module "caf" {
   source  = "aztfmod/caf/azurerm"
-  version = "~> 5.1.0"
-
+  version = "5.3.0-preview2"
+ 
   global_settings      = var.global_settings
   logged_user_objectId = var.logged_user_objectId
   tags                 = var.tags
@@ -12,6 +12,8 @@ module "caf" {
   keyvaults            = var.keyvaults
   managed_identities   = var.managed_identities
   role_mapping         = var.role_mapping
+  shared_services      = var.shared_services
+  storage_accounts     = var.storage_accounts
 
   networking = {
     application_gateways                                    = var.application_gateways
@@ -30,6 +32,7 @@ module "caf" {
     private_dns                                             = var.private_dns
   }
 
+  log_analytics = var.log_analytics
   diagnostics = {
     # Get the diagnostics settings of services to create
     diagnostic_log_analytics = var.diagnostic_log_analytics
@@ -39,6 +42,7 @@ module "caf" {
     aks_clusters     = var.aks_clusters
     bastion_hosts    = var.bastion_hosts
     virtual_machines = var.virtual_machines
+    availability_sets = var.availability_sets
   }
 
   security = {

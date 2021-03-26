@@ -3,28 +3,34 @@ vnets = {
     resource_group_key = "sap_hana"
     vnet = {
       name          = "sap-hana-vnet"
-      address_space = ["10.1.0.0/16"]
+      address_space = ["10.12.0.0/16"]
     }
-    specialsubnets = {}
+    specialsubnets = {
+      gateway = {
+        name    = "gateway"
+        cidr    = ["10.12.2.0/24"]
+        enforce_private_link_endpoint_network_policies = true
+        enforce_private_link_service_network_policies  = true
+      }
+      AzureBastionSubnet = {
+        name    = "AzureBastionSubnet"
+        cidr    = ["10.12.3.0/27"]
+        enforce_private_link_endpoint_network_policies = true
+        enforce_private_link_service_network_policies  = true
+      }
+    }
     subnets = {
-      jump-host = {
-        name    = "jump_host"
-        cidr    = ["10.1.3.0/24"]
-        nsg_key = "jump_host"
+      application = {
+        name    = "application"
+        cidr    = ["10.12.0.0/24"]
+        enforce_private_link_endpoint_network_policies = true
+        enforce_private_link_service_network_policies  = true
       }
-      sap-app = {
-        name    = "sap-app"
-        cidr    = ["10.1.4.0/24"]
-        nsg_key = "sap-app"
-      }
-      sap-hana = {
-        name    = "hana"
-        cidr    = ["10.1.5.0/24"]
-        nsg_key = "sap-hana"
-      }
-      sap-nfs = {
-        name    = "nsf"
-        cidr    = ["10.1.6.0/24"]
+      database = {
+        name    = "database"
+        cidr    = ["10.12.1.0/24"]
+        enforce_private_link_endpoint_network_policies = true
+        enforce_private_link_service_network_policies  = true
       }
     }
   }

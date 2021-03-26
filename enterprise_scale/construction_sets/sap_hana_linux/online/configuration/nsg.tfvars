@@ -1,6 +1,8 @@
 network_security_group_definition = {
-
   ascsvm1-nsg = {
+    version = 1
+    resource_group_key             = "sap_hana"
+    name                           = "ascsvm1"
     nsg = [
       {
         name                       = "ssh",
@@ -15,7 +17,6 @@ network_security_group_definition = {
       },
       {
         name                       = "Port_3200",
-        description                = "sapdp00  enq/serverhost"
         priority                   = "1020"
         direction                  = "Inbound"
         access                     = "Allow"
@@ -29,6 +30,9 @@ network_security_group_definition = {
   }
 
   ascsvm2-nsg = {
+    version = 1
+    resource_group_key             = "sap_hana"
+    name                           = "ascsvm2"
     nsg = [
       {
         name                       = "ssh",
@@ -65,7 +69,11 @@ network_security_group_definition = {
       },
     ]
   }
+
   hanavm1-nsg = {
+    version = 1
+    resource_group_key             = "sap_hana"
+    name                           = "hanavm1"
     nsg = [
       {
         name                       = "ssh",
@@ -80,7 +88,6 @@ network_security_group_definition = {
       },
       {
         name                       = "Port_30015",
-        description                = "hana studio connection"
         priority                   = "1020"
         direction                  = "Inbound"
         access                     = "Allow"
@@ -92,7 +99,6 @@ network_security_group_definition = {
       },
       {
         name                       = "Port_30013",
-        description                = "backup montior via Azure"
         priority                   = "1030"
         direction                  = "Inbound"
         access                     = "Allow"
@@ -106,6 +112,9 @@ network_security_group_definition = {
   }
 
   hanavm2-nsg = {
+    version = 1
+    resource_group_key             = "sap_hana"
+    name                           = "hanavm2"
     nsg = [
       {
         name                       = "ssh",
@@ -120,7 +129,6 @@ network_security_group_definition = {
       },
       {
         name                       = "Port_30015",
-        description                = "hana studio connection"
         priority                   = "1020"
         direction                  = "Inbound"
         access                     = "Allow"
@@ -132,7 +140,6 @@ network_security_group_definition = {
       },
       {
         name                       = "Port_30003",
-        description                = "connection - vm2"
         priority                   = "1030"
         direction                  = "Inbound"
         access                     = "Allow"
@@ -144,7 +151,6 @@ network_security_group_definition = {
       },
       {
         name                       = "Port_30013",
-        description                = "hdb connection"
         priority                   = "1040"
         direction                  = "Inbound"
         access                     = "Allow"
@@ -169,6 +175,9 @@ network_security_group_definition = {
   }
 
   iscsivm1-nsg = {
+    version = 1
+    resource_group_key             = "sap_hana"
+    name                           = "iscsivm1"
     nsg = [
       {
         name                       = "ssh",
@@ -185,6 +194,9 @@ network_security_group_definition = {
   }
 
   iscsivm2-nsg = {
+    version = 1
+    resource_group_key             = "sap_hana"
+    name                           = "iscsivm2"
     nsg = [
       {
         name                       = "ssh",
@@ -201,6 +213,9 @@ network_security_group_definition = {
   }
 
   iscsivm3-nsg = {
+    version = 1
+    resource_group_key             = "sap_hana"
+    name                           = "iscsivm3"
     nsg = [
       {
         name                       = "ssh",
@@ -217,6 +232,9 @@ network_security_group_definition = {
   }
 
   jbvm1-nsg = {
+    version = 1
+    resource_group_key             = "sap_hana"
+    name                           = "jbvm1"
     nsg = [
       {
         name                       = "RDP",
@@ -244,6 +262,9 @@ network_security_group_definition = {
   }
   
   nfsvm1-nsg = {
+    version = 1
+    resource_group_key             = "sap_hana"
+    name                           = "nfsvm1"
     nsg = [
       {
         name                       = "SSH",
@@ -260,6 +281,9 @@ network_security_group_definition = {
   }
   
   nfsvm2-nsg = {
+    version = 1
+    resource_group_key             = "sap_hana"
+    name                           = "nfsvm2"
     nsg = [
       {
         name                       = "SSH",
@@ -276,9 +300,12 @@ network_security_group_definition = {
   }
 
   pasvm1-nsg = {
+    version = 1
+    resource_group_key             = "sap_hana"
+    name                           = "pasvm1-nsg "
     nsg = [
       {
-        name                       = "SSH"
+        name                       = "SSH",
         priority                   = "1010"
         direction                  = "Inbound"
         access                     = "Allow"
@@ -289,8 +316,7 @@ network_security_group_definition = {
         destination_address_prefix = "*"
       },
       {
-        name                       = "Port_3210"
-        description                = "message server port connection via sap gui"
+        name                       = "Port_3210",
         priority                   = "1020"
         direction                  = "Inbound"
         access                     = "Allow"
@@ -301,8 +327,7 @@ network_security_group_definition = {
         destination_address_prefix = "*"
       },
       {
-        name                       = "Port_30013"
-        description                = "hanadb-ilb:30013i"
+        name                       = "Port_30013",
         priority                   = "1030"
         direction                  = "Inbound"
         access                     = "Allow"
@@ -313,7 +338,7 @@ network_security_group_definition = {
         destination_address_prefix = "*"
       },
       {
-        name                       = "Port_30015"
+        name                       = "Port_30015",
         priority                   = "1040"
         direction                  = "Inbound"
         access                     = "Allow"
@@ -324,7 +349,7 @@ network_security_group_definition = {
         destination_address_prefix = "*"
       },
       {
-        name                       = "Port_3310"
+        name                       = "Port_3310",
         priority                   = "1050"
         direction                  = "Inbound"
         access                     = "Allow"
@@ -338,6 +363,9 @@ network_security_group_definition = {
   }
 
   sentinelagent-nsg = {
+    version = 1
+    resource_group_key             = "sap_hana"
+    name                           = "sentinelagent-nsg "
     nsg = [
       {
         name                       = "SSH",
@@ -352,71 +380,4 @@ network_security_group_definition = {
       },
     ]
   }
-
-   app = {
-
-    nsg = [
-      {
-        name                       = "app-inbound-http",
-        priority                   = "103"
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "tcp"
-        source_port_range          = "*"
-        destination_port_range     = "80"
-        source_address_prefix      = "*"
-        destination_address_prefix = "VirtualNetwork"
-      },
-      {
-        name                       = "app-inbound-https",
-        priority                   = "104"
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "tcp"
-        source_port_range          = "*"
-        destination_port_range     = "443"
-        source_address_prefix      = "*"
-        destination_address_prefix = "VirtualNetwork"
-      },
-      {
-        name                       = "ssh-from-jump-host",
-        priority                   = "105"
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "tcp"
-        source_port_range          = "*"
-        destination_port_range     = "22"
-        source_address_prefix      = "10.1.3.0/24"
-        destination_address_prefix = "VirtualNetwork"
-      },
-    ]
-  }
-
-  sap-nfs = {
-
-    nsg = [
-      {
-        name                       = "app-inbound",
-        priority                   = "103"
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "tcp"
-        source_port_range          = "*"
-        destination_port_ranges    = ["30015-31015 ", "3615"]
-        source_address_prefix      = "10.1.4.0/24"
-        destination_address_prefix = "VirtualNetwork"
-      },
-      {
-        name                       = "ssh-from-jump-host",
-        priority                   = "104"
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "tcp"
-        source_port_range          = "*"
-        destination_port_range     = "22"
-        source_address_prefix      = "10.1.3.0/24"
-        destination_address_prefix = "VirtualNetwork"
-      },
-    ]
-  }
-}
+ } 

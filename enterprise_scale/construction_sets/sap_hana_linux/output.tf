@@ -13,3 +13,7 @@ output "domain_name_registrations" {
 output "vnets" {
   value = module.caf.vnets
 }
+
+output "storage_accounts" {
+  value = module.caf.storage_accounts
+}

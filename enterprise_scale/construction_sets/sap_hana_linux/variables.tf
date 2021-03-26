@@ -18,6 +18,9 @@ variable "resource_groups" {
 variable "vnets" {
   default = {}
 }
+variable "storage_accounts" {
+  default = {}
+}
 
 variable "tags" {
   default = {}
@@ -27,6 +30,9 @@ variable "aks_clusters" {
   default = {}
 }
 
+variable "log_analytics" {
+  default = {}
+}
 variable "diagnostic_log_analytics" {
   default = {}
 }
@@ -79,6 +85,9 @@ variable "route_tables" {
   default = {}
 }
 
+variable "availability_sets" {
+  default = {}
+}
 variable "azurerm_routes" {
   default = {}
 }
@@ -121,4 +130,13 @@ variable "application_gateways" {
 
 variable "application_gateway_applications" {
   default = {}
+}
+
+variable "shared_services" {
+  description = "Shared services configuration objects"
+  default = {
+    # automations = {}
+    # monitoring = {}
+    # recovery_vaults = {}
+  }
 }
