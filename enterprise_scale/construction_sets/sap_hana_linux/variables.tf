@@ -64,6 +64,9 @@ variable "role_mapping" {
 variable "keyvaults" {
   default = {}
 }
+variable "dynamic_keyvault_secrets" {
+  default = {}
+}
 
 variable "azurerm_firewalls" {
   default = {}
