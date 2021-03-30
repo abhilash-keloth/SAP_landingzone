@@ -1,6 +1,19 @@
+diagnostic_storage_accounts = {
+  # Stores diagnostic logging for region1
+  s4hana_diag = {
+    name                     = "s4hana_diag89098"
+    region                   = "region1"
+    resource_group_key       = "sap_hana"
+    account_kind             = "StorageV2"
+    account_tier             = "Standard"
+    account_replication_type = "LRS"
+    access_tier              = "Cool"
+  }
+}
+
 availability_sets = {
-    dia-avset = {
-        name = "dia-avset"
+    dia_avset = {
+        name = "dia_avset"
         resource_group_key = "sap_hana"
         platform_update_domain_count = 5
         platform_fault_domain_count = 2
@@ -38,6 +51,7 @@ virtual_machines = {
     resource_group_key = "sap_hana"
     os_type            = "linux"
     keyvault_key       = "sentinel4sapkey"
+    boot_diagnostics_storage_account_key = "s4hana_diag"
 
     # Define the number of networking cards to attach the virtual machine
     networking_interfaces = {
@@ -86,21 +100,6 @@ virtual_machines = {
     }
 
     data_disks = {
-    #   db_data1 = {
-    #     name                 = "bastion-db-data1"
-    #     storage_account_type = "Standard_LRS"
-    #     # Only Empty is supported. More community contributions required to cover other scenarios
-    #     create_option = "Empty"
-    #     disk_size_gb  = "10"
-    #     lun           = 1
-    #   }
-    #   db_data2 = {
-    #     name                 = "bastion-db-data2"
-    #     storage_account_type = "Standard_LRS"
-    #     create_option        = "Empty"
-    #     disk_size_gb         = "10"
-    #     lun                  = 2
-    #   }
     }
 
   }
@@ -109,6 +108,7 @@ virtual_machines = {
     resource_group_key = "sap_hana"
     os_type            = "windows"
     keyvault_key       = "sentinel4sapkey"
+    boot_diagnostics_storage_account_key = "s4hana_diag"
 
     # Define the number of networking cards to attach the virtual machine
     networking_interfaces = {
@@ -174,6 +174,7 @@ virtual_machines = {
     resource_group_key = "sap_hana"
     os_type            = "linux"
     keyvault_key       = "sentinel4sapkey"
+    boot_diagnostics_storage_account_key = "s4hana_diag"
 
     # Define the number of networking cards to attach the virtual machine
     networking_interfaces = {
@@ -239,6 +240,7 @@ virtual_machines = {
     resource_group_key = "sap_hana"
     os_type            = "linux"
     keyvault_key       = "sentinel4sapkey"
+    boot_diagnostics_storage_account_key = "s4hana_diag"
 
     # Define the number of networking cards to attach the virtual machine
     networking_interfaces = {
@@ -304,6 +306,7 @@ virtual_machines = {
     resource_group_key = "sap_hana"
     os_type            = "linux"
     keyvault_key       = "sentinel4sapkey"
+    boot_diagnostics_storage_account_key = "s4hana_diag"
 
     # Define the number of networking cards to attach the virtual machine
     networking_interfaces = {
@@ -398,6 +401,7 @@ virtual_machines = {
     resource_group_key = "sap_hana"
     os_type            = "linux"
     keyvault_key       = "sentinel4sapkey"
+    boot_diagnostics_storage_account_key = "s4hana_diag"
 
     # Define the number of networking cards to attach the virtual machine
     networking_interfaces = {
@@ -494,6 +498,7 @@ virtual_machines = {
     resource_group_key = "sap_hana"
     os_type            = "linux"
     keyvault_key       = "sentinel4sapkey"
+    boot_diagnostics_storage_account_key = "s4hana_diag"
 
     # Define the number of networking cards to attach the virtual machine
     networking_interfaces = {
@@ -548,6 +553,7 @@ virtual_machines = {
     resource_group_key = "sap_hana"
     os_type            = "linux"
     keyvault_key       = "sentinel4sapkey"
+    boot_diagnostics_storage_account_key = "s4hana_diag"
 
     # Define the number of networking cards to attach the virtual machine
     networking_interfaces = {
@@ -602,6 +608,7 @@ virtual_machines = {
     resource_group_key = "sap_hana"
     os_type            = "linux"
     keyvault_key       = "sentinel4sapkey"
+    boot_diagnostics_storage_account_key = "s4hana_diag"
 
     # Define the number of networking cards to attach the virtual machine
     networking_interfaces = {
@@ -657,6 +664,7 @@ virtual_machines = {
     resource_group_key = "sap_hana"
     os_type            = "linux"
     keyvault_key       = "sentinel4sapkey"
+    boot_diagnostics_storage_account_key = "s4hana_diag"
 
     # Define the number of networking cards to attach the virtual machine
     networking_interfaces = {
@@ -722,6 +730,7 @@ virtual_machines = {
     resource_group_key = "sap_hana"
     os_type            = "linux"
     keyvault_key       = "sentinel4sapkey"
+    boot_diagnostics_storage_account_key = "s4hana_diag"
 
     # Define the number of networking cards to attach the virtual machine
     networking_interfaces = {
@@ -787,6 +796,8 @@ virtual_machines = {
     resource_group_key = "sap_hana"
     os_type            = "linux"
     keyvault_key       = "sentinel4sapkey"
+    boot_diagnostics_storage_account_key = "s4hana_diag"
+    availability_set_key = "dia-avset"
 
     # Define the number of networking cards to attach the virtual machine
     networking_interfaces = {

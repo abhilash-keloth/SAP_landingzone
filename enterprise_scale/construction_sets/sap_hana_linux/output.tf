@@ -17,3 +17,9 @@ output "vnets" {
 output "storage_accounts" {
   value = module.caf.storage_accounts
 }
+output "virtual_machines" {
+  value = module.caf.virtual_machines
+}
+output "public_ip_addresses" {
+  value = module.caf.public_ip_addresses
+}

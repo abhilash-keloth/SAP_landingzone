@@ -135,6 +135,14 @@ variable "application_gateway_applications" {
   default = {}
 }
 
+variable "load_balancers" {
+  default = {}
+}
+
+variable "diagnostic_storage_accounts" {
+  default = {}
+}
+
 variable "shared_services" {
   description = "Shared services configuration objects"
   default = {
