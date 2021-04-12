@@ -8,9 +8,9 @@ keyvaults = {
 
     creation_policies = {
       logged_in_user = {
-        key_permissions = [ "Get", "List","Update", "Create","Import","Delete","Recover","Backup","Restore"]
-        secret_permissions = [ "Get", "List","Set","Delete","Recover", "Backup","Restore"]
-        certificate_permissions = [ "Get","List","Update","Create","Import","Delete","Recover","Backup","Restore","ManageContacts","ManageIssuers","GetIssuers","ListIssuers", "SetIssuers","DeleteIssuers"]
+        key_permissions = [ "Get", "List","Update", "Create","Import","Delete","Recover","Backup","Restore", "Purge"]
+        secret_permissions = [ "Get", "List","Set","Delete","Recover", "Backup","Restore" ,"Purge"]
+        certificate_permissions = [ "Get","List","Update","Create","Import","Delete","Recover","Backup","Restore","ManageContacts","ManageIssuers","GetIssuers","ListIssuers", "SetIssuers","DeleteIssuers", "Purge"]
       }
     }
   }
