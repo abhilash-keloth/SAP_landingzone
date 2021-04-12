@@ -15,17 +15,6 @@ network_security_group_definition = {
         source_address_prefix      = "*"
         destination_address_prefix = "*"
       },
-      {
-        name                       = "Port_3200",
-        priority                   = "1020"
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "*"
-        source_port_range          = "*"
-        destination_port_range     = "3200"
-        source_address_prefix      = "*"
-        destination_address_prefix = "*"
-      },
     ]
   }
 
@@ -42,28 +31,6 @@ network_security_group_definition = {
         protocol                   = "TCP"
         source_port_range          = "*"
         destination_port_range     = "22"
-        source_address_prefix      = "*"
-        destination_address_prefix = "*"
-      },
-      {
-        name                       = "Port_9100",
-        priority                   = "1020"
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "*"
-        source_port_range          = "*"
-        destination_port_range     = "9100"
-        source_address_prefix      = "*"
-        destination_address_prefix = "*"
-      },
-      {
-        name                       = "Port_3200",
-        priority                   = "1030"
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "*"
-        source_port_range          = "*"
-        destination_port_range     = "3200"
         source_address_prefix      = "*"
         destination_address_prefix = "*"
       },
@@ -86,28 +53,6 @@ network_security_group_definition = {
         source_address_prefix      = "*"
         destination_address_prefix = "*"
       },
-      {
-        name                       = "Port_30015",
-        priority                   = "1020"
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "*"
-        source_port_range          = "*"
-        destination_port_range     = "9100"
-        source_address_prefix      = "*"
-        destination_address_prefix = "*"
-      },
-      {
-        name                       = "Port_30013",
-        priority                   = "1030"
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "*"
-        source_port_range          = "*"
-        destination_port_range     = "30013"
-        source_address_prefix      = "*"
-        destination_address_prefix = "*"
-      },
     ]
   }
 
@@ -124,50 +69,6 @@ network_security_group_definition = {
         protocol                   = "TCP"
         source_port_range          = "*"
         destination_port_range     = "22"
-        source_address_prefix      = "*"
-        destination_address_prefix = "*"
-      },
-      {
-        name                       = "Port_30015",
-        priority                   = "1020"
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "*"
-        source_port_range          = "*"
-        destination_port_range     = "9100"
-        source_address_prefix      = "*"
-        destination_address_prefix = "*"
-      },
-      {
-        name                       = "Port_30003",
-        priority                   = "1030"
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "*"
-        source_port_range          = "*"
-        destination_port_range     = "30003"
-        source_address_prefix      = "*"
-        destination_address_prefix = "*"
-      },
-      {
-        name                       = "Port_30013",
-        priority                   = "1040"
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "*"
-        source_port_range          = "*"
-        destination_port_range     = "30013"
-        source_address_prefix      = "*"
-        destination_address_prefix = "*"
-      },
-      {
-        name                       = "Port_30102",
-        priority                   = "1050"
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "*"
-        source_port_range          = "*"
-        destination_port_range     = "30102"
         source_address_prefix      = "*"
         destination_address_prefix = "*"
       },
@@ -247,17 +148,6 @@ network_security_group_definition = {
         source_address_prefix      = "*"
         destination_address_prefix = "*"
       },
-      {
-        name                       = "Port_22_winscp",
-        priority                   = "310"
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "TCP"
-        source_port_range          = "*"
-        destination_port_range     = "22"
-        source_address_prefix      = "*"
-        destination_address_prefix = "*"
-      },
     ]
   }
   
@@ -312,50 +202,6 @@ network_security_group_definition = {
         protocol                   = "TCP"
         source_port_range          = "*"
         destination_port_range     = "22"
-        source_address_prefix      = "*"
-        destination_address_prefix = "*"
-      },
-      {
-        name                       = "Port_3210",
-        priority                   = "1020"
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "TCP"
-        source_port_range          = "*"
-        destination_port_range     = "3210"
-        source_address_prefix      = "*"
-        destination_address_prefix = "*"
-      },
-      {
-        name                       = "Port_30013",
-        priority                   = "1030"
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "TCP"
-        source_port_range          = "*"
-        destination_port_range     = "30013"
-        source_address_prefix      = "*"
-        destination_address_prefix = "*"
-      },
-      {
-        name                       = "Port_30015",
-        priority                   = "1040"
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "TCP"
-        source_port_range          = "*"
-        destination_port_range     = "30015"
-        source_address_prefix      = "*"
-        destination_address_prefix = "*"
-      },
-      {
-        name                       = "Port_3310",
-        priority                   = "1050"
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "TCP"
-        source_port_range          = "*"
-        destination_port_range     = "3310"
         source_address_prefix      = "*"
         destination_address_prefix = "*"
       },
