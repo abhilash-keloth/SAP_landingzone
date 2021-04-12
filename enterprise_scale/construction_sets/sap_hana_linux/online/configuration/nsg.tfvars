@@ -207,23 +207,4 @@ network_security_group_definition = {
       },
     ]
   }
-
-  sentinelagent-nsg = {
-    version = 1
-    resource_group_key             = "sap_hana"
-    name                           = "sentinelagent-nsg "
-    nsg = [
-      {
-        name                       = "SSH",
-        priority                   = "300"
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "TCP"
-        source_port_range          = "*"
-        destination_port_range     = "22"
-        source_address_prefix      = "*"
-        destination_address_prefix = "*"
-      },
-    ]
-  }
  } 

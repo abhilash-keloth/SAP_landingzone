@@ -45,65 +45,6 @@ availability_sets = {
 }
 
 virtual_machines = {
-
-  # Configuration to deploy a bastion host linux virtual machine
-  sentinel_agent = {
-    resource_group_key = "sap_hana"
-    os_type            = "linux"
-    keyvault_key       = "sentinel4sapkey"
-    boot_diagnostics_storage_account_key = "s4hana_diag"
-
-    # Define the number of networking cards to attach the virtual machine
-    networking_interfaces = {
-      nic0 = {
-        # Value of the keys from networking.tfvars
-        vnet_key   = "sap_hana"
-        subnet_key = "application"
-        # public_address_key = ""
-        name                    = "sentinelagent-nic0"
-        enable_ip_forwarding    = false
-        internal_dns_name_label = "sentinelagent-nic0"
-        public_ip_address_key   = "sentinelagent_ip"
-        primary                 = true
-        nsg_key                 = "sentinelagent-nsg"
-      }
-    }
-
-    #
-    virtual_machine_settings = {
-      linux = {
-        name                            = "sentinel_agent"
-        resource_group_key              = "sap_hana"
-        size                            = "Standard_B2s"
-        admin_username                  = "sapadm"
-        disable_password_authentication = true
-
-        # Value of the nic keys to attach the VM. The first one in the list is the primary nic
-        network_interface_keys = ["nic0"]
-
-        os_disk = {
-          create_option        = "fromImage"
-          name                 = "sentinel-os"
-          caching              = "ReadWrite"
-          storage_account_type = "Premium_LRS"
-          disk_size_gb         = 30
-        }
-
-        source_image_reference = {
-          publisher = "Canonical"
-          offer     = "UbuntuServer"
-          sku       = "18.04-LTS"
-          version   = "latest"
-        }
-
-      }
-    }
-
-    data_disks = {
-    }
-
-  }
-
   jbvm1_agent = {
     resource_group_key = "sap_hana"
     os_type            = "windows"
@@ -186,7 +127,6 @@ virtual_machines = {
         name                    = "ascsvm1-nic0"
         enable_ip_forwarding    = false
         internal_dns_name_label = "ascsvm1-nic0"
-        public_ip_address_key   = "ascsvm1_ip"
         primary                 = true
         nsg_key                 = "ascsvm1-nsg"
       }
@@ -252,7 +192,6 @@ virtual_machines = {
         name                    = "ascsvm2-nic0"
         enable_ip_forwarding    = false
         internal_dns_name_label = "ascsvm2-nic0"
-        public_ip_address_key   = "ascsvm2_ip"
         primary                 = true
         nsg_key                 = "ascsvm2-nsg"
       }
@@ -318,7 +257,6 @@ virtual_machines = {
         name                    = "hanavm1-nic0"
         enable_ip_forwarding    = false
         internal_dns_name_label = "hanavm1-nic0"
-        public_ip_address_key   = "hanavm1_ip"
         primary                 = true
         nsg_key                 = "hanavm1-nsg"
       }
@@ -413,7 +351,6 @@ virtual_machines = {
         name                    = "hanavm2-nic0"
         enable_ip_forwarding    = false
         internal_dns_name_label = "hanavm2-nic0"
-        public_ip_address_key   = "hanavm2_ip"
         primary                 = true
         nsg_key                 = "hanavm2-nsg"
       }
@@ -510,7 +447,6 @@ virtual_machines = {
         name                    = "iscsivm1-nic0"
         enable_ip_forwarding    = false
         internal_dns_name_label = "iscsivm1-nic0"
-        public_ip_address_key   = "iscsivm1_ip"
         primary                 = true
         nsg_key                 = "iscsivm1-nsg"
       }
@@ -565,7 +501,6 @@ virtual_machines = {
         name                    = "iscsivm2-nic0"
         enable_ip_forwarding    = false
         internal_dns_name_label = "iscsivm2-nic0"
-        public_ip_address_key   = "iscsivm2_ip"
         primary                 = true
         nsg_key                 = "iscsivm2-nsg"
       }
@@ -620,7 +555,6 @@ virtual_machines = {
         name                    = "iscsivm3-nic0"
         enable_ip_forwarding    = false
         internal_dns_name_label = "iscsivm3-nic0"
-        public_ip_address_key   = "iscsivm3_ip"
         primary                 = true
         nsg_key                 = "iscsivm3-nsg"
       }
@@ -676,7 +610,6 @@ virtual_machines = {
         name                    = "nfsvm1-nic0"
         enable_ip_forwarding    = false
         internal_dns_name_label = "nfsvm1-nic0"
-        public_ip_address_key   = "nfsvm1_ip"
         primary                 = true
         nsg_key                 = "nfsvm1-nsg"
       }
@@ -742,7 +675,6 @@ virtual_machines = {
         name                    = "nfsvm2-nic0"
         enable_ip_forwarding    = false
         internal_dns_name_label = "nfsvm2-nic0"
-        public_ip_address_key   = "nfsvm2_ip"
         primary                 = true
         nsg_key                 = "nfsvm2-nsg"
       }
@@ -809,7 +741,6 @@ virtual_machines = {
         name                    = "pasvm1-nic0"
         enable_ip_forwarding    = false
         internal_dns_name_label = "pasvm1-nic0"
-        public_ip_address_key   = "pasvm1_ip"
         primary                 = true
         nsg_key                 = "pasvm1-nsg"
       }
