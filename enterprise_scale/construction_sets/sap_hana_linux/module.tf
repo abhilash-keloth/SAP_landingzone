@@ -1,6 +1,6 @@
 module "caf" {
   source  = "aztfmod/caf/azurerm"
-  version = "5.3.0-preview2"
+  version = "5.3.0"
  
   global_settings                 = var.global_settings
   logged_user_objectId            = var.logged_user_objectId
@@ -44,6 +44,7 @@ module "caf" {
     bastion_hosts    = var.bastion_hosts
     virtual_machines = var.virtual_machines
     availability_sets = var.availability_sets
+    proximity_placement_groups = var.proximity_placement_groups
   }
 
   security = {

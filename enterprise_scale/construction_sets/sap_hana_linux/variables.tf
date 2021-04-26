@@ -143,6 +143,10 @@ variable "diagnostic_storage_accounts" {
   default = {}
 }
 
+variable "proximity_placement_groups" {
+  default = {}
+}
+
 variable "shared_services" {
   description = "Shared services configuration objects"
   default = {
