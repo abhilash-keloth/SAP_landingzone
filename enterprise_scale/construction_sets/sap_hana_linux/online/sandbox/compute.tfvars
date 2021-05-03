@@ -115,11 +115,11 @@ virtual_machines = {
         vnet_key   = "sap_hana"
         subnet_key = "application"
         # public_address_key = ""
-        name                    = "ascsvm1-nic0"
+        name                    = "sbxappvm1-nic0"
         enable_ip_forwarding    = false
-        internal_dns_name_label = "ascsvm1-nic0"
+        internal_dns_name_label = "sbxappvm1-nic0"
         primary                 = true
-        nsg_key                 = "ascsvm1-nsg"
+        nsg_key                 = "sbxappvm1-nsg"
       }
     }
       #
@@ -138,7 +138,7 @@ virtual_machines = {
 
         os_disk = {
           create_option        = "fromImage"
-          name                 = "ascsvm1-os"
+          name                 = "sbxappvm1-os"
           caching              = "ReadWrite"
           storage_account_type = "Standard_LRS"
           disk_size_gb         = "128" 
@@ -155,8 +155,8 @@ virtual_machines = {
     }
 
     data_disks = {
-      ascsvm1_usrsapexe = {
-        name                 = "ascsvm1_usrsap_exe"
+      sbxappvm1_usrsapexe = {
+        name                 = "sbxappvm1_usrsap_exe"
         storage_account_type = "Premium_LRS"
         # Only Empty is supported. More community contributions required to cover other scenarios
         create_option = "Empty"
@@ -181,9 +181,9 @@ virtual_machines = {
         vnet_key   = "sap_hana"
         subnet_key = "database"
         # public_address_key = ""
-        name                    = "hanavm1-nic0"
+        name                    = "sbxdbvm1-nic0"
         enable_ip_forwarding    = false
-        internal_dns_name_label = "hanavm1-nic0"
+        internal_dns_name_label = "sbxdbvm1-nic0"
         primary                 = true
         nsg_key                 = "hanavm1-nsg"
       }

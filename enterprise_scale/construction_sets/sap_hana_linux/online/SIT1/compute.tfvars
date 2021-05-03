@@ -33,6 +33,18 @@ availability_sets = {
         platform_update_domain_count = 5
         platform_fault_domain_count = 2
     }
+    ascs_avset = {
+        name = "ascs_avset"
+        resource_group_key = "sap_hana"
+        platform_update_domain_count = 5
+        platform_fault_domain_count = 2
+    }
+    webdisp_avset = {
+        name = "webdisp_avset"
+        resource_group_key = "sap_hana"
+        platform_update_domain_count = 5
+        platform_fault_domain_count = 2
+    }
 }
 
 virtual_machines = {
@@ -102,7 +114,139 @@ virtual_machines = {
 
   # }
 
-  sit1appvm1 = {
+
+  webdispvm1_agent = {
+    resource_group_key = "sap_hana"
+    os_type            = "linux"
+    keyvault_key       = "sentinel4sapkey"
+    boot_diagnostics_storage_account_key = "s4hana_diag"
+
+    # Define the number of networking cards to attach the virtual machine
+    networking_interfaces = {
+      nic0 = {
+        # Value of the keys from networking.tfvars
+        vnet_key   = "sap_hana"
+        subnet_key = "application"
+        # public_address_key = ""
+        name                    = "webdispvm1-nic0"
+        enable_ip_forwarding    = false
+        internal_dns_name_label = "webdispsvm1-nic0"
+        primary                 = true
+        nsg_key                 = "webdispvm1-nsg"
+      }
+    }
+      #
+    virtual_machine_settings = {
+      linux = {
+        availability_set_key            = "webdisp_avset"
+        name                            = "webdispvm1"
+        resource_group_key              = "sap_hana"
+        size                            = "Standard_DS1_v2"  # To be replaced with "Standard_D4ds_v4"
+        admin_username                  = "demouser"
+        disable_password_authentication = true
+
+        # Value of the nic keys to attach the VM. The first one in the list is the primary nic
+        network_interface_keys = ["nic0"]
+
+        os_disk = {
+          create_option        = "fromImage"
+          name                 = "webdispvm1-os"
+          caching              = "ReadWrite"
+          storage_account_type = "Standard_LRS"
+          disk_size_gb         = "128"
+        }
+
+        source_image_reference = {
+          publisher = "SUSE"
+          offer     = "SLES-SAP"
+          sku       = "12-SP3"
+          version   = "latest"
+        }
+
+      }
+    }
+
+    data_disks = {
+      webdispvm1_usrsap = {
+        name                 = "webdispvm1_usrsap"
+        storage_account_type = "Premium_LRS"
+        # Only Empty is supported. More community contributions required to cover other scenarios
+        create_option = "Empty"
+        disk_size_gb  = "64"
+        lun           = 0
+        caching       = "None"
+        write_accelerator_enabled = false
+      }
+    }
+  }
+
+  webdispvm2_agent = {
+    resource_group_key = "sap_hana"
+    os_type            = "linux"
+    keyvault_key       = "sentinel4sapkey"
+    boot_diagnostics_storage_account_key = "s4hana_diag"
+
+    # Define the number of networking cards to attach the virtual machine
+    networking_interfaces = {
+      nic0 = {
+        # Value of the keys from networking.tfvars
+        vnet_key   = "sap_hana"
+        subnet_key = "application"
+        # public_address_key = ""
+        name                    = "webdispvm2-nic0"
+        enable_ip_forwarding    = false
+        internal_dns_name_label = "webdispvm2-nic0"
+        primary                 = true
+        nsg_key                 = "webdispvm2-nsg"
+      }
+    }
+      #
+    virtual_machine_settings = {
+      linux = {
+        availability_set_key            = "webdisp_avset"
+        name                            = "webdispvm2"
+        resource_group_key              = "sap_hana"
+        size                            = "Standard_DS1_v2"  # To be replaced with "Standard_D4ds_v4"
+        admin_username                  = "demouser"
+        disable_password_authentication = true
+
+        # Value of the nic keys to attach the VM. The first one in the list is the primary nic
+        network_interface_keys = ["nic0"]
+
+        os_disk = {
+          create_option        = "fromImage"
+          name                 = "webdispvm2-os"
+          caching              = "ReadWrite"
+          storage_account_type = "Standard_LRS"
+          disk_size_gb         = "128"
+        }
+
+        source_image_reference = {
+          publisher = "SUSE"
+          offer     = "SLES-SAP"
+          sku       = "12-SP3"
+          version   = "latest"
+        }
+
+      }
+    }
+
+    data_disks = {
+      webdispvm2_usrsap = {
+        name                 = "webdispvm2_usrsap"
+        storage_account_type = "Premium_LRS"
+        # Only Empty is supported. More community contributions required to cover other scenarios
+        create_option = "Empty"
+        disk_size_gb  = "64"
+        lun           = 0
+        caching       = "None"
+        write_accelerator_enabled = false
+      }
+    }
+  }
+
+  ########################### ASCS VMs  #######################################################
+  ascsvm1_agent = {
     resource_group_key = "sap_hana"
     os_type            = "linux"
     keyvault_key       = "sentinel4sapkey"
@@ -118,6 +262,138 @@ virtual_machines = {
         name                    = "ascsvm1-nic0"
         enable_ip_forwarding    = false
         internal_dns_name_label = "ascsvm1-nic0"
+        primary                 = true
+        nsg_key                 = "ascsvm1-nsg"
+      }
+    }
+      #
+    virtual_machine_settings = {
+      linux = {
+        availability_set_key            = "ascs_avset"
+        name                            = "ascsvm1"
+        resource_group_key              = "sap_hana"
+        size                            = "Standard_DS1_v2"  # To be replaced with "Standard_D4ds_v4"
+        admin_username                  = "demouser"
+        disable_password_authentication = true
+
+        # Value of the nic keys to attach the VM. The first one in the list is the primary nic
+        network_interface_keys = ["nic0"]
+
+        os_disk = {
+          create_option        = "fromImage"
+          name                 = "ascsvm1-os"
+          caching              = "ReadWrite"
+          storage_account_type = "Standard_LRS"
+          disk_size_gb         = "128"
+        }
+
+        source_image_reference = {
+          publisher = "SUSE"
+          offer     = "SLES-SAP"
+          sku       = "12-SP3"
+          version   = "latest"
+        }
+
+      }
+    }
+
+    data_disks = {
+      ascsvm1_usrsap = {
+        name                 = "ascsvm1_usrsap"
+        storage_account_type = "Premium_LRS"
+        # Only Empty is supported. More community contributions required to cover other scenarios
+        create_option = "Empty"
+        disk_size_gb  = "128"
+        lun           = 0
+        caching       = "None"
+        write_accelerator_enabled = false
+      }
+    }
+  }
+
+  ascsvm2_agent = {
+    resource_group_key = "sap_hana"
+    os_type            = "linux"
+    keyvault_key       = "sentinel4sapkey"
+    boot_diagnostics_storage_account_key = "s4hana_diag"
+
+    # Define the number of networking cards to attach the virtual machine
+    networking_interfaces = {
+      nic0 = {
+        # Value of the keys from networking.tfvars
+        vnet_key   = "sap_hana"
+        subnet_key = "application"
+        # public_address_key = ""
+        name                    = "ascsvm2-nic0"
+        enable_ip_forwarding    = false
+        internal_dns_name_label = "ascsvm2-nic0"
+        primary                 = true
+        nsg_key                 = "ascsvm2-nsg"
+      }
+    }
+      #
+    virtual_machine_settings = {
+      linux = {
+        availability_set_key            = "ascs_avset"
+        name                            = "ascsvm2"
+        resource_group_key              = "sap_hana"
+        size                            = "Standard_DS1_v2"  # To be replaced with "Standard_D4ds_v4"
+        admin_username                  = "demouser"
+        disable_password_authentication = true
+
+        # Value of the nic keys to attach the VM. The first one in the list is the primary nic
+        network_interface_keys = ["nic0"]
+
+        os_disk = {
+          create_option        = "fromImage"
+          name                 = "ascsvm2-os"
+          caching              = "ReadWrite"
+          storage_account_type = "Standard_LRS"
+          disk_size_gb         = "128"
+        }
+
+        source_image_reference = {
+          publisher = "SUSE"
+          offer     = "SLES-SAP"
+          sku       = "12-SP3"
+          version   = "latest"
+        }
+
+      }
+    }
+
+    data_disks = {
+      ascsvm2_usrsap = {
+        name                 = "ascsvm2_usrsap"
+        storage_account_type = "Premium_LRS"
+        # Only Empty is supported. More community contributions required to cover other scenarios
+        create_option = "Empty"
+        disk_size_gb  = "128"
+        lun           = 0
+        caching       = "None"
+        write_accelerator_enabled = false
+      }
+    }
+  }
+
+  ########################## APP VMs #######################################
+
+  sit1appvm1 = {
+    resource_group_key = "sap_hana"
+    os_type            = "linux"
+    keyvault_key       = "sentinel4sapkey"
+    boot_diagnostics_storage_account_key = "s4hana_diag"
+
+    # Define the number of networking cards to attach the virtual machine
+    networking_interfaces = {
+      nic0 = {
+        # Value of the keys from networking.tfvars
+        vnet_key   = "sap_hana"
+        subnet_key = "application"
+        # public_address_key = ""
+        name                    = "sit1appvm1-nic0"
+        enable_ip_forwarding    = false
+        internal_dns_name_label = "sit1appvm1-nic0"
         primary                 = true
         nsg_key                 = "ascsvm1-nsg"
       }
@@ -155,8 +431,8 @@ virtual_machines = {
     }
 
     data_disks = {
-      ascsvm1_usrsapexe = {
-        name                 = "sitappvm1_usrsap_exe"
+      sit1appvm1_usrsapexe = {
+        name                 = "sit1appvm1_usrsap_exe"
         storage_account_type = "Premium_LRS"
         # Only Empty is supported. More community contributions required to cover other scenarios
         create_option = "Empty"
@@ -225,7 +501,7 @@ virtual_machines = {
     }
 
     data_disks = {
-      ascsvm1_usrsapexe = {
+      sit1appvm2_usrsapexe = {
         name                 = "sitappvm2_usrsap_exe"
         storage_account_type = "Premium_LRS"
         # Only Empty is supported. More community contributions required to cover other scenarios

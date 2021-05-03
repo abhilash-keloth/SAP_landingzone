@@ -1,5 +1,5 @@
 network_security_group_definition = {
-  ascsvm1-nsg = {
+  sbxappvm1-nsg = {
     version = 1
     resource_group_key             = "sap_hana"
     name                           = "ascsvm1"
@@ -18,7 +18,7 @@ network_security_group_definition = {
     ]
   }
 
-  ascsvm2-nsg = {
+  sbxappvm2-nsg = {
     version = 1
     resource_group_key             = "sap_hana"
     name                           = "ascsvm2"

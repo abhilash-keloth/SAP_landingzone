@@ -2,19 +2,19 @@ vnets = {
   sap_hana = {
     resource_group_key = "sap_hana"
     vnet = {
-      name          = "sap-hana-dev-vnet"
-      address_space = ["10.13.0.0/16"]
+      name          = "sap-hana-sit1-vnet"
+      address_space = ["10.14.0.0/16"]
     }
     specialsubnets = {
       gateway = {
         name    = "gateway"
-        cidr    = ["10.13.2.0/24"]
+        cidr    = ["10.14.2.0/24"]
         enforce_private_link_endpoint_network_policies = true
         enforce_private_link_service_network_policies  = true
       }
       AzureBastionSubnet = {
         name    = "AzureBastionSubnet"
-        cidr    = ["10.13.3.0/27"]
+        cidr    = ["10.14.3.0/27"]
         enforce_private_link_endpoint_network_policies = true
         enforce_private_link_service_network_policies  = true
       }
@@ -22,13 +22,13 @@ vnets = {
     subnets = {
       application = {
         name    = "application"
-        cidr    = ["10.13.0.0/24"]
+        cidr    = ["10.14.0.0/24"]
         enforce_private_link_endpoint_network_policies = true
         enforce_private_link_service_network_policies  = true
       }
       database = {
         name    = "database"
-        cidr    = ["10.13.1.0/24"]
+        cidr    = ["10.14.1.0/24"]
         enforce_private_link_endpoint_network_policies = true
         enforce_private_link_service_network_policies  = true
       }
@@ -37,167 +37,80 @@ vnets = {
 }
 
 load_balancers = {
-  # app_ilb = {
-  #   name                      = "app_ilb"
-  #   sku                       = "basic"
-  #   resource_group_key        = "sap_hana"
-  #   backend_address_pool_name = "sgh-ascs-backpool"
-  #   frontend_ip_configurations = {
-  #     LoadBalancerFrontEnd = {
-  #       name                          = "LoadBalancerFrontEnd"
-  #       vnet_key                      = "sap_hana"
-  #       subnet_key                    = "application"
-  #       private_ip_address_allocation = "Dynamic"
-  #     }
-  #     sgh-ers-ilb = {
-  #       name                          = "sgh-ers-ilb"
-  #       vnet_key                      = "sap_hana"
-  #       subnet_key                    = "application"
-  #       private_ip_address_allocation = "Dynamic"
-  #     }
-  #   }
-  #       #multiple VMs and NICs can be attached to the Load Balancer. Specify the respective VMs and NICs in the following syntac
-  #   nic_bap_association = {
-  #     sbxappvm1 = {
-  #       vm_key  = "sbxappvm1"
-  #       nic_key = "nic0"
-  #     }
-  #     # ascsvm2_agent = {
-  #     #   vm_key  = "sbxappvm2"
-  #     #   nic_key = "nic0"
-  #     # }
-  #   }
+  ascs_ilb = {
+    name                      = "ascs_ilb"
+    sku                       = "Standard"
+    resource_group_key        = "sap_hana"
+    backend_address_pool_name = "sgh-ascs-backpool"
+    frontend_ip_configurations = {
+      LoadBalancerFrontEnd = {
+        name                          = "LoadBalancerFrontEnd"
+        vnet_key                      = "sap_hana"
+        subnet_key                    = "application"
+        private_ip_address_allocation = "Dynamic"
+      }
+      sgh-ers-ilb = {
+        name                          = "sgh-ers-ilb"
+        vnet_key                      = "sap_hana"
+        subnet_key                    = "application"
+        private_ip_address_allocation = "Dynamic"
+      }
+    }
+        #multiple VMs and NICs can be attached to the Load Balancer. Specify the respective VMs and NICs in the following syntac
+    nic_bap_association = {
+      ascsvm1_agent = {
+        vm_key  = "ascsvm1_agent"
+        nic_key = "nic0"
+      }
+      ascsvm2_agent = {
+        vm_key  = "ascsvm2_agent"
+        nic_key = "nic0"
+      }
+    }
 
-  #   probe = {
-  #     resource_group_key = "sap_hana"
-  #     load_balancer_key  = "app_ilb"
-  #     probe_name         = "ers-62102"
-  #     port               = "62102"
-  #   }
+    probe = {
+      resource_group_key = "sap_hana"
+      load_balancer_key  = "ascs_ilb"
+      probe_name         = "ers-62102"
+      port               = "62102"
+    }
 
-  #   lb_rules = {
-  #     sgh-lb-3200 = {
-  #       idle_timeout_in_minutes        = "30"
-  #       resource_group_key             = "sap_hana"
-  #       load_balancer_key              = "app_ilb"
-  #       lb_rule_name                   = "sgh-lb-3200"
-  #       protocol                       = "tcp"
-  #       frontend_port                  = "3200"
-  #       backend_port                   = "3200"
-  #       frontend_ip_configuration_name = "LoadBalancerFrontEnd" #name must match the configuration that's defined in the load_balancers block.
-  #     }
-  #     sgh-lb-3600 = {
-  #       idle_timeout_in_minutes        = "30"
-  #       resource_group_key             = "sap_hana"
-  #       load_balancer_key              = "app_ilb"
-  #       lb_rule_name                   = "sgh-lb-3600"
-  #       protocol                       = "tcp"
-  #       frontend_port                  = "3600"
-  #       backend_port                   = "3600"
-  #       frontend_ip_configuration_name = "LoadBalancerFrontEnd" #name must match the configuration that's defined in the load_balancers block.
-  #     }
-  #     sgh-lb-3900 = {
-  #       idle_timeout_in_minutes        = "30"
-  #       resource_group_key             = "sap_hana"
-  #       load_balancer_key              = "app_ilb"
-  #       lb_rule_name                   = "sgh-lb-3900"
-  #       protocol                       = "tcp"
-  #       frontend_port                  = "3900"
-  #       backend_port                   = "3900"
-  #       frontend_ip_configuration_name = "LoadBalancerFrontEnd" #name must match the configuration that's defined in the load_balancers block.
-  #     }
-  #     sgh-lb-50013 = {
-  #       idle_timeout_in_minutes        = "30"
-  #       resource_group_key             = "sap_hana"
-  #       load_balancer_key              = "app_ilb"
-  #       lb_rule_name                   = "sgh-lb-50013"
-  #       protocol                       = "tcp"
-  #       frontend_port                  = "50013"
-  #       backend_port                   = "50013"
-  #       frontend_ip_configuration_name = "LoadBalancerFrontEnd" #name must match the configuration that's defined in the load_balancers block.
-  #     }
-  #     sgh-lb-50014 = {
-  #       idle_timeout_in_minutes        = "30"
-  #       resource_group_key             = "sap_hana"
-  #       load_balancer_key              = "app_ilb"
-  #       lb_rule_name                   = "sgh-lb-50014"
-  #       protocol                       = "tcp"
-  #       frontend_port                  = "50014"
-  #       backend_port                   = "50014"
-  #       frontend_ip_configuration_name = "LoadBalancerFrontEnd" #name must match the configuration that's defined in the load_balancers block.
-  #     }
-  #     sgh-lb-50016 = {
-  #       idle_timeout_in_minutes        = "30"
-  #       resource_group_key             = "sap_hana"
-  #       load_balancer_key              = "app_ilb"
-  #       lb_rule_name                   = "sgh-lb-50016"
-  #       protocol                       = "tcp"
-  #       frontend_port                  = "50016"
-  #       backend_port                   = "50016"
-  #       frontend_ip_configuration_name = "LoadBalancerFrontEnd" #name must match the configuration that's defined in the load_balancers block.
-  #     }
-  #     sgh-lb-8100 = {
-  #       idle_timeout_in_minutes        = "30"
-  #       resource_group_key             = "sap_hana"
-  #       load_balancer_key              = "app_ilb"
-  #       lb_rule_name                   = "sgh-lb-8100"
-  #       protocol                       = "tcp"
-  #       frontend_port                  = "8100"
-  #       backend_port                   = "8100"
-  #       frontend_ip_configuration_name = "LoadBalancerFrontEnd" #name must match the configuration that's defined in the load_balancers block.
-  #     }
-  #     ers-lb-3302 = {
-  #       idle_timeout_in_minutes        = "30"
-  #       resource_group_key             = "sap_hana"
-  #       load_balancer_key              = "app_ilb"
-  #       lb_rule_name                   = "ers-lb-3302"
-  #       protocol                       = "tcp"
-  #       frontend_port                  = "3302"
-  #       backend_port                   = "3302"
-  #       frontend_ip_configuration_name = "sgh-ers-ilb" #name must match the configuration that's defined in the load_balancers block.
-  #     }
-  #     ers-lb-50213 = {
-  #       idle_timeout_in_minutes        = "30"
-  #       resource_group_key             = "sap_hana"
-  #       load_balancer_key              = "app_ilb"
-  #       lb_rule_name                   = "ers-lb-50213"
-  #       protocol                       = "tcp"
-  #       frontend_port                  = "50213"
-  #       backend_port                   = "50213"
-  #       frontend_ip_configuration_name = "sgh-ers-ilb" #name must match the configuration that's defined in the load_balancers block.
-  #     }
-  #     ers-lb-50214 = {
-  #       idle_timeout_in_minutes        = "30"
-  #       resource_group_key             = "sap_hana"
-  #       load_balancer_key              = "app_ilb"
-  #       lb_rule_name                   = "ers-lb-50214"
-  #       protocol                       = "tcp"
-  #       frontend_port                  = "50214"
-  #       backend_port                   = "50214"
-  #       frontend_ip_configuration_name = "sgh-ers-ilb" #name must match the configuration that's defined in the load_balancers block.
-  #     }
-  #     ers-lb-50216 = {
-  #       idle_timeout_in_minutes        = "30"
-  #       resource_group_key             = "sap_hana"
-  #       load_balancer_key              = "app_ilb"
-  #       lb_rule_name                   = "ers-lb-50216"
-  #       protocol                       = "tcp"
-  #       frontend_port                  = "50216"
-  #       backend_port                   = "50216"
-  #       frontend_ip_configuration_name = "sgh-ers-ilb" #name must match the configuration that's defined in the load_balancers block.
-  #     }
-  #     ers-lb-3202 = {
-  #       idle_timeout_in_minutes        = "30"
-  #       resource_group_key             = "sap_hana"
-  #       load_balancer_key              = "app_ilb"
-  #       lb_rule_name                   = "ers-lb-3202"
-  #       protocol                       = "tcp"
-  #       frontend_port                  = "3202"
-  #       backend_port                   = "3202"
-  #       frontend_ip_configuration_name = "LoadBalancerFrontEnd" #name must match the configuration that's defined in the load_balancers block.
-  #     }
-  #   }
-  #  }
+    lb_rules = {
+      sgh-lb-3200 = {
+        idle_timeout_in_minutes        = "30"
+        resource_group_key             = "sap_hana"
+        load_balancer_key              = "ascs_ilb"
+        lb_rule_name                   = "sgh-lb-3200"
+        protocol                       = "tcp"
+        frontend_port                  = "3200"
+        backend_port                   = "3200"
+        frontend_ip_configuration_name = "LoadBalancerFrontEnd" #name must match the configuration that's defined in the load_balancers block.
+      }
+      sgh-lb-3600 = {
+        idle_timeout_in_minutes        = "30"
+        resource_group_key             = "sap_hana"
+        load_balancer_key              = "ascs_ilb"
+        lb_rule_name                   = "sgh-lb-3600"
+        protocol                       = "tcp"
+        frontend_port                  = "3600"
+        backend_port                   = "3600"
+        frontend_ip_configuration_name = "LoadBalancerFrontEnd" #name must match the configuration that's defined in the load_balancers block.
+      }
+      sgh-lb-3900 = {
+        idle_timeout_in_minutes        = "30"
+        resource_group_key             = "sap_hana"
+        load_balancer_key              = "ascs_ilb"
+        lb_rule_name                   = "sgh-lb-3900"
+        protocol                       = "tcp"
+        frontend_port                  = "3900"
+        backend_port                   = "3900"
+        frontend_ip_configuration_name = "LoadBalancerFrontEnd" #name must match the configuration that's defined in the load_balancers block.
+      }
+      
+    }
+
+  }
+
 
   db_ilb = {
     name                      = "db_ilb"
