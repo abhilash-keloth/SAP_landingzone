@@ -150,7 +150,46 @@ network_security_group_definition = {
       },
     ]
   }
+
   
+  webdispvm1-nsg = {
+    version = 1
+    resource_group_key             = "sap_hana"
+    name                           = "webdispvm1-nsg"
+    nsg = [
+      {
+        name                       = "ssh",
+        priority                   = "1010"
+        direction                  = "Inbound"
+        access                     = "Allow"
+        protocol                   = "TCP"
+        source_port_range          = "*"
+        destination_port_range     = "22"
+        source_address_prefix      = "*"
+        destination_address_prefix = "*"
+      },
+    ]
+  }
+
+  webdispvm2-nsg = {
+    version = 1
+    resource_group_key             = "sap_hana"
+    name                           = "webdispvm2-nsg"
+    nsg = [
+      {
+        name                       = "ssh",
+        priority                   = "1010"
+        direction                  = "Inbound"
+        access                     = "Allow"
+        protocol                   = "TCP"
+        source_port_range          = "*"
+        destination_port_range     = "22"
+        source_address_prefix      = "*"
+        destination_address_prefix = "*"
+      },
+    ]
+  }
+
   nfsvm1-nsg = {
     version = 1
     resource_group_key             = "sap_hana"

@@ -45,6 +45,12 @@ availability_sets = {
         platform_update_domain_count = 5
         platform_fault_domain_count = 2
     }
+    nfs_avset = {
+        name = "nfs_avset"
+        resource_group_key = "sap_hana"
+        platform_update_domain_count = 5
+        platform_fault_domain_count = 2
+    }
 }
 
 virtual_machines = {
@@ -147,6 +153,7 @@ virtual_machines = {
 
         # Value of the nic keys to attach the VM. The first one in the list is the primary nic
         network_interface_keys = ["nic0"]
+        zone = "1"
 
         os_disk = {
           create_option        = "fromImage"
@@ -212,6 +219,7 @@ virtual_machines = {
 
         # Value of the nic keys to attach the VM. The first one in the list is the primary nic
         network_interface_keys = ["nic0"]
+        zone = "2"
 
         os_disk = {
           create_option        = "fromImage"
@@ -278,6 +286,7 @@ virtual_machines = {
 
         # Value of the nic keys to attach the VM. The first one in the list is the primary nic
         network_interface_keys = ["nic0"]
+        zone = "1"
 
         os_disk = {
           create_option        = "fromImage"
@@ -343,6 +352,7 @@ virtual_machines = {
 
         # Value of the nic keys to attach the VM. The first one in the list is the primary nic
         network_interface_keys = ["nic0"]
+        zone = "2"
 
         os_disk = {
           create_option        = "fromImage"
@@ -411,6 +421,7 @@ virtual_machines = {
 
         # Value of the nic keys to attach the VM. The first one in the list is the primary nic
         network_interface_keys = ["nic0"]
+        zone = "1"
 
         os_disk = {
           create_option        = "fromImage"
@@ -481,6 +492,7 @@ virtual_machines = {
 
         # Value of the nic keys to attach the VM. The first one in the list is the primary nic
         network_interface_keys = ["nic0"]
+        zone = "2"
 
         os_disk = {
           create_option        = "fromImage"
@@ -548,6 +560,7 @@ virtual_machines = {
 
         # Value of the nic keys to attach the VM. The first one in the list is the primary nic
         network_interface_keys = ["nic0"]
+        zone = "1"
 
         os_disk = {
           create_option        = "fromImage"
@@ -645,6 +658,7 @@ virtual_machines = {
 
         # Value of the nic keys to attach the VM. The first one in the list is the primary nic
         network_interface_keys = ["nic0"]
+        zone = "2"
 
         os_disk = {
           create_option        = "fromImage"
@@ -706,6 +720,140 @@ virtual_machines = {
         write_accelerator_enabled = false
       }
       
+    }
+  }
+
+############################################# NFS VMs ##################################################
+  
+  nfsvm1 = {
+    resource_group_key = "sap_hana"
+    os_type            = "linux"
+    keyvault_key       = "sentinel4sapkey"
+    boot_diagnostics_storage_account_key = "s4hana_diag"
+
+    # Define the number of networking cards to attach the virtual machine
+    networking_interfaces = {
+      nic0 = {
+        # Value of the keys from networking.tfvars
+        vnet_key   = "sap_hana"
+        subnet_key = "application"
+        # public_address_key = ""
+        name                    = "nfsvm1-nic0"
+        enable_ip_forwarding    = false
+        internal_dns_name_label = "nfsvm1-nic0"
+        primary                 = true
+        nsg_key                 = "nfsvm1-nsg"
+      }
+    }
+  
+    virtual_machine_settings = {
+      linux = {
+        availability_set_key            = "nfs_avset"
+        name                            = "nfsvm1"
+        resource_group_key              = "sap_hana"
+        size                            = "Standard_DS1_v2"  # To be replaced with "Standard_D4ds_v4"
+        admin_username                  = "demouser"
+        disable_password_authentication = true
+
+        # Value of the nic keys to attach the VM. The first one in the list is the primary nic
+        network_interface_keys = ["nic0"]
+        zone = "1"
+
+        os_disk = {
+          create_option        = "fromImage"
+          name                 = "nfsvm1-os"
+          caching              = "ReadWrite"
+          storage_account_type = "Standard_LRS"
+          disk_size_gb         = "30"
+        }
+
+        source_image_reference = {
+          publisher = "SUSE"
+          offer     = "SLES-SAP"
+          sku       = "12-SP3"
+          version   = "latest"
+        }
+
+      }
+    }
+
+    data_disks = {
+      nfsvm1_sapmnt = {
+        name                 = "nfsvm1_sapmnt"
+        storage_account_type = "Premium_LRS"
+        # Only Empty is supported. More community contributions required to cover other scenarios
+        create_option = "Empty"
+        disk_size_gb  = "256"
+        lun           = 0
+        caching       = "None"
+        write_accelerator_enabled = false
+      }
+    }
+  }
+
+  nfsvm2 = {
+    resource_group_key = "sap_hana"
+    os_type            = "linux"
+    keyvault_key       = "sentinel4sapkey"
+    boot_diagnostics_storage_account_key = "s4hana_diag"
+
+    # Define the number of networking cards to attach the virtual machine
+    networking_interfaces = {
+      nic0 = {
+        # Value of the keys from networking.tfvars
+        vnet_key   = "sap_hana"
+        subnet_key = "application"
+        # public_address_key = ""
+        name                    = "nfsvm2-nic0"
+        enable_ip_forwarding    = false
+        internal_dns_name_label = "nfsvm2-nic0"
+        primary                 = true
+        nsg_key                 = "nfsvm2-nsg"
+      }
+    }
+      #
+    virtual_machine_settings = {
+      linux = {
+        availability_set_key            = "nfs_avset"
+        name                            = "nfsvm2"
+        resource_group_key              = "sap_hana"
+        size                            = "Standard_DS1_v2"  # To be replaced with "Standard_D4ds_v4"
+        admin_username                  = "demouser"
+        disable_password_authentication = true
+
+        # Value of the nic keys to attach the VM. The first one in the list is the primary nic
+        network_interface_keys = ["nic0"]
+        zone = "2"
+
+        os_disk = {
+          create_option        = "fromImage"
+          name                 = "nfsvm2-os"
+          caching              = "ReadWrite"
+          storage_account_type = "Standard_LRS"
+          disk_size_gb         = "30"
+        }
+
+        source_image_reference = {
+          publisher = "SUSE"
+          offer     = "SLES-SAP"
+          sku       = "12-SP3"
+          version   = "latest"
+        }
+
+      }
+    }
+
+    data_disks = {
+      nfsvm2_sapmnt = {
+        name                 = "nfsvm2_sapmnt"
+        storage_account_type = "Premium_LRS"
+        # Only Empty is supported. More community contributions required to cover other scenarios
+        create_option = "Empty"
+        disk_size_gb  = "256"
+        lun           = 0
+        caching       = "None"
+        write_accelerator_enabled = false
+      }
     }
   }
 

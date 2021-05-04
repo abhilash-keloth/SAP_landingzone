@@ -1,6 +1,6 @@
 keyvaults = {
   sentinel4sapkey = {
-    name               = "sentinel4sapkey-sit1"
+    name               = "sentinel4sap-key-sit1"
     resource_group_key = "sap_hana"
     sku_name           = "standard"
 

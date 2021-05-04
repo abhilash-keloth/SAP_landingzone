@@ -192,59 +192,60 @@ load_balancers = {
     }
    }
 
-  # nfs_ilb = {
-  #   name                      = "nfs_ilb"
-  #   sku                       = "Basic"
-  #   resource_group_key        = "sap_hana"
-  #   backend_address_pool_name = "nfs-backpool"
-  #   frontend_ip_configurations = {
-  #     LoadBalancerFrontEnd = {
-  #       name                          = "LoadBalancerFrontEnd"
-  #       vnet_key                      = "sap_hana"
-  #       subnet_key                    = "application"
-  #       private_ip_address_allocation = "Dynamic"
-  #     }
-  #   }
-  #       #multiple VMs and NICs can be attached to the Load Balancer. Specify the respective VMs and NICs in the following syntac
-  #   nic_bap_association = {
-  #     nfsvm1 = {
-  #       vm_key  = "sbxappvm1"
-  #       nic_key = "nic0"
-  #     }
-  #     nfsvm2 = {
-  #       vm_key  = "sbxdbvm1"
-  #       nic_key = "nic0"
-  #     }
-  #   }
+  nfs_ilb = {
+    name                      = "nfs_ilb"
+    sku                       = "Basic"
+    resource_group_key        = "sap_hana"
+    backend_address_pool_name = "nfs-backpool"
+    frontend_ip_configurations = {
+      LoadBalancerFrontEnd = {
+        name                          = "LoadBalancerFrontEnd"
+        vnet_key                      = "sap_hana"
+        subnet_key                    = "application"
+        private_ip_address_allocation = "Dynamic"
+      }
+    }
+        #multiple VMs and NICs can be attached to the Load Balancer. Specify the respective VMs and NICs in the following syntac
+    nic_bap_association = {
+      nfsvm1 = {
+        vm_key  = "nfsvm1"
+        nic_key = "nic0"
+      }
+      nfsvm2 = {
+        vm_key  = "nfsvm2"
+        nic_key = "nic0"
+      }
+    }
 
-  #   probe = {
-  #     resource_group_key = "sap_hana"
-  #     load_balancer_key  = "nfs_ilb"
-  #     probe_name         = "61000"
-  #     port               = "61000"
-  #   }
+    probe = {
+      resource_group_key = "sap_hana"
+      load_balancer_key  = "nfs_ilb"
+      probe_name         = "61000"
+      port               = "61000"
+    }
 
-  #   lb_rules = {
-  #     nfs-lb-udp2049 = {
-  #       idle_timeout_in_minutes        = "30"
-  #       resource_group_key             = "sap_hana"
-  #       load_balancer_key              = "nfs_ilb"
-  #       lb_rule_name                   = "nfs-lb-udp2049"
-  #       protocol                       = "udp"
-  #       frontend_port                  = "2049"
-  #       backend_port                   = "2049"
-  #       frontend_ip_configuration_name = "LoadBalancerFrontEnd"
-  #     }
-  #     fs-lb-2049 = {
-  #       idle_timeout_in_minutes        = "30"
-  #       resource_group_key             = "sap_hana"
-  #       load_balancer_key              = "nfs_ilb"
-  #       lb_rule_name                   = "fs-lb-2049"
-  #       protocol                       = "tcp"
-  #       frontend_port                  = "2049"
-  #       backend_port                   = "2049"
-  #       frontend_ip_configuration_name = "LoadBalancerFrontEnd" #name must match the configuration that's defined in the load_balancers block.
-  #     }
-  #   }
-  #  }
+    lb_rules = {
+      nfs-lb-udp2049 = {
+        idle_timeout_in_minutes        = "30"
+        resource_group_key             = "sap_hana"
+        load_balancer_key              = "nfs_ilb"
+        lb_rule_name                   = "nfs-lb-udp2049"
+        protocol                       = "udp"
+        frontend_port                  = "2049"
+        backend_port                   = "2049"
+        frontend_ip_configuration_name = "LoadBalancerFrontEnd"
+      }
+      fs-lb-2049 = {
+        idle_timeout_in_minutes        = "30"
+        resource_group_key             = "sap_hana"
+        load_balancer_key              = "nfs_ilb"
+        lb_rule_name                   = "fs-lb-2049"
+        protocol                       = "tcp"
+        frontend_port                  = "2049"
+        backend_port                   = "2049"
+        frontend_ip_configuration_name = "LoadBalancerFrontEnd" #name must match the configuration that's defined in the load_balancers block.
+      }
+    }
+   }
+   
 }
