@@ -153,7 +153,7 @@ virtual_machines = {
 
         # Value of the nic keys to attach the VM. The first one in the list is the primary nic
         network_interface_keys = ["nic0"]
-        zone = "1"
+        # zone = "1"
 
         os_disk = {
           create_option        = "fromImage"
@@ -219,7 +219,7 @@ virtual_machines = {
 
         # Value of the nic keys to attach the VM. The first one in the list is the primary nic
         network_interface_keys = ["nic0"]
-        zone = "2"
+        # zone = "2"
 
         os_disk = {
           create_option        = "fromImage"
@@ -286,7 +286,7 @@ virtual_machines = {
 
         # Value of the nic keys to attach the VM. The first one in the list is the primary nic
         network_interface_keys = ["nic0"]
-        zone = "1"
+        # zone = "1"
 
         os_disk = {
           create_option        = "fromImage"
@@ -352,7 +352,7 @@ virtual_machines = {
 
         # Value of the nic keys to attach the VM. The first one in the list is the primary nic
         network_interface_keys = ["nic0"]
-        zone = "2"
+        # zone = "2"
 
         os_disk = {
           create_option        = "fromImage"
@@ -421,7 +421,7 @@ virtual_machines = {
 
         # Value of the nic keys to attach the VM. The first one in the list is the primary nic
         network_interface_keys = ["nic0"]
-        zone = "1"
+        # zone = "1"
 
         os_disk = {
           create_option        = "fromImage"
@@ -492,7 +492,7 @@ virtual_machines = {
 
         # Value of the nic keys to attach the VM. The first one in the list is the primary nic
         network_interface_keys = ["nic0"]
-        zone = "2"
+        # zone = "2"
 
         os_disk = {
           create_option        = "fromImage"
@@ -551,7 +551,7 @@ virtual_machines = {
       #
     virtual_machine_settings = {
       linux = {
-        availability_set_key            = "db_avset"
+        # availability_set_key            = "db_avset"
         name                            = "sit1_db_vm1"
         resource_group_key              = "sap_hana"
         size                            = "Standard_DS1_v2" #"Standard_M32ls" to whitelist and update
@@ -560,7 +560,7 @@ virtual_machines = {
 
         # Value of the nic keys to attach the VM. The first one in the list is the primary nic
         network_interface_keys = ["nic0"]
-        zone = "1"
+        # zone = "1"
 
         os_disk = {
           create_option        = "fromImage"
@@ -649,7 +649,7 @@ virtual_machines = {
       #
     virtual_machine_settings = {
       linux = {
-        availability_set_key            = "db_avset"
+        # availability_set_key            = "db_avset"
         name                            = "sit1_db_vm2"
         resource_group_key              = "sap_hana"
         size                            = "Standard_DS1_v2" #"Standard_M32ls" to whitelist and update
@@ -658,7 +658,7 @@ virtual_machines = {
 
         # Value of the nic keys to attach the VM. The first one in the list is the primary nic
         network_interface_keys = ["nic0"]
-        zone = "2"
+        # zone = "2"
 
         os_disk = {
           create_option        = "fromImage"
@@ -757,7 +757,7 @@ virtual_machines = {
 
         # Value of the nic keys to attach the VM. The first one in the list is the primary nic
         network_interface_keys = ["nic0"]
-        zone = "1"
+        # zone = "1"
 
         os_disk = {
           create_option        = "fromImage"
@@ -823,7 +823,7 @@ virtual_machines = {
 
         # Value of the nic keys to attach the VM. The first one in the list is the primary nic
         network_interface_keys = ["nic0"]
-        zone = "2"
+        # zone = "2"
 
         os_disk = {
           create_option        = "fromImage"
